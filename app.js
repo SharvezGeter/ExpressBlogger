@@ -63,7 +63,7 @@ const usersRouter = require('./routes/users');
 const blogsRouter = require('./routes/blogs');
 
 //instantiate the actual express app
-const port = 5001;
+const port = 6000;
 const app = express();
 
 // view engine setup
