@@ -56,6 +56,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+require('dotenv').config({
+  path: "./config.env"
+})
+
 //Setup router for routes
 //importing from routes/
 const indexRouter = require('./routes/index');
@@ -63,8 +67,15 @@ const usersRouter = require('./routes/users');
 const blogsRouter = require('./routes/blogs');
 
 //instantiate the actual express app
-const port = 6000;
 const app = express();
+
+//get mongoDB driver connection
+const {
+  mongoConnect
+
+} = require('./mongo.js')
+mongoConnect()
+
 
 // view engine setup
 //sets environment variables (things we can access across the application)
@@ -100,9 +111,5 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
 });
-app.listen(port, ()=>{
-  console.log(`Example app listening on port ${port}`)
-})
 module.exports = app;
